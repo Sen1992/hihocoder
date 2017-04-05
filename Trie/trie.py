@@ -3,6 +3,7 @@
 import gc
 import collections
 gc.disable()
+#期初的思路是将对象作为key，因此在节点的类里面实现了equal和hash两个函数,但发现这样的时间消耗太高，无法通过，故采用下面字典嵌套的方法
 # class TrieNode:
 #     def __init__(self,char,value=1):
 #         self.char = char
@@ -51,8 +52,11 @@ gc.disable()
 #                 print 0
 #                 return
 #         print times
-
-
+'''
+主要用于处理海量数据，统计出现最频繁的单词，以前根据前缀显示单词，通过共享前缀的方式节省空间和提升效率使用,
+查找单词的时间复杂度为O(nlength),空间复杂度小于O(nlength),在建立树的过程中，我们使用count来记录每个字
+符出现的次数
+'''
 class TrieNode:
     def __init__(self):
         self.nodes = collections.defaultdict(TrieNode)
